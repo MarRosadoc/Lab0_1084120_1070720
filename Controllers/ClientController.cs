@@ -10,7 +10,6 @@ namespace Lab0_1084120_1070720.Controllers
 {
     public class ClientController : Controller
     {
-        
         // GET: ClientController
         public ActionResult Index()
         {
