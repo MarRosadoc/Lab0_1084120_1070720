@@ -1,21 +1,15 @@
 ﻿@model IEnumerable<Lab0_1084120_1070720.Models.Client>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Organize by Last Name";
 }
 
-<h1>Index</h1>
+<h1>Organize by Last Name</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <p>
     <a asp-action="OrganizeName">Organize by Name</a>
 </p>
-<p>
-    <a asp-action="OrganizeLastName">Organize by Last Name</a>
-</p>
-
+<a asp-action="Index">Back to List</a>
 <table class="table">
     <thead>
         <tr>
@@ -57,12 +51,11 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
             </tr>
         }
-
     </tbody>
 </table>

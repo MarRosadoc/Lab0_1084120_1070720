@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using Lab0_1084120_1070720.Models;
+
 
 namespace Lab0_1084120_1070720.Controllers
 {
@@ -56,6 +58,7 @@ namespace Lab0_1084120_1070720.Controllers
         // GET: ClientController/Edit/5
         public ActionResult Edit(int id)
         {
+            
             var editClient = Singleton.Instance.ClientList.Find(x => x.Id == id);
             
             return View(editClient);
@@ -79,6 +82,14 @@ namespace Lab0_1084120_1070720.Controllers
         // GET: ClientController/Delete/5
         public ActionResult Delete(int id)
         {
+            var ViewClient = Singleton.Instance.ClientList.Find(x => x.Id == id);
+            return View(ViewClient);
+
+            var deleteClient = Singleton.Instance.ClientList.Find(x => x.Id == id);
+            if (deleteClient == null) 
+            {
+                return NotFound();
+            }
             return View();
         }
 
@@ -89,12 +100,50 @@ namespace Lab0_1084120_1070720.Controllers
         {
             try
             {
+                var deleteClient = Singleton.Instance.ClientList.Find(x => x.Id == id);
+                Singleton.Instance.ClientList.Remove(deleteClient);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult OrganizeName(int id)
+        {
+            //Selection Sort
+            for (int i = 0; i < Singleton.Instance.ClientList.Count-1; i++)
+            {
+                for (int j = i + 1; j < Singleton.Instance.ClientList.Count; j++)
+                {
+                    if (Singleton.Instance.ClientList[j].Name.CompareTo(Singleton.Instance.ClientList[i].Name) < 0)
+                    {
+                        var temp = Singleton.Instance.ClientList[j];
+                        Singleton.Instance.ClientList[j] = Singleton.Instance.ClientList[i];
+                        Singleton.Instance.ClientList[i] = temp;
+                    }
+                }
+            }
+            return View(Singleton.Instance.ClientList);
+        }
+
+        public ActionResult OrganizeLastName(int id)
+        {
+            //Selection Sort
+            for (int i = 0; i < Singleton.Instance.ClientList.Count - 1; i++)
+            {
+                for (int j = i + 1; j < Singleton.Instance.ClientList.Count; j++)
+                {
+                    if (Singleton.Instance.ClientList[j].LastName.CompareTo(Singleton.Instance.ClientList[i].LastName) < 0)
+                    {
+                        var temp = Singleton.Instance.ClientList[j];
+                        Singleton.Instance.ClientList[j] = Singleton.Instance.ClientList[i];
+                        Singleton.Instance.ClientList[i] = temp;
+                    }
+                }
+            }
+            return View(Singleton.Instance.ClientList);
         }
     }
 }

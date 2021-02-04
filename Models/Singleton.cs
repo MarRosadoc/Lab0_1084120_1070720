@@ -9,6 +9,7 @@ namespace Lab0_1084120_1070720.Models
     {
         private readonly static Singleton _instance = new Singleton();
         public List<Client> ClientList;
+        
         private Singleton()
         {
             ClientList = new List<Client>();
