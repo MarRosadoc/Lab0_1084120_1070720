@@ -56,9 +56,9 @@ namespace Lab0_1084120_1070720.Controllers
         }
 
         // GET: ClientController/Edit/5
+    
         public ActionResult Edit(int id)
         {
-            
             var editClient = Singleton.Instance.ClientList.Find(x => x.Id == id);
             
             return View(editClient);
@@ -71,6 +71,10 @@ namespace Lab0_1084120_1070720.Controllers
         {
             try
             {
+                Singleton.Instance.ClientList.Find(x => x.Id == id).Name = collection["Name"];
+                Singleton.Instance.ClientList.Find(x => x.Id == id).LastName = collection["LastName"];
+                Singleton.Instance.ClientList.Find(x => x.Id == id).Phone = Convert.ToInt32(collection["Phone"]);
+                Singleton.Instance.ClientList.Find(x => x.Id == id).Description = collection["Description"];
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -136,6 +140,24 @@ namespace Lab0_1084120_1070720.Controllers
                 for (int j = i + 1; j < Singleton.Instance.ClientList.Count; j++)
                 {
                     if (Singleton.Instance.ClientList[j].LastName.CompareTo(Singleton.Instance.ClientList[i].LastName) < 0)
+                    {
+                        var temp = Singleton.Instance.ClientList[j];
+                        Singleton.Instance.ClientList[j] = Singleton.Instance.ClientList[i];
+                        Singleton.Instance.ClientList[i] = temp;
+                    }
+                }
+            }
+            return View(Singleton.Instance.ClientList);
+        }
+        public ActionResult OrganizeId(int id)
+        {
+            //Back to List
+            //Selection Sort
+            for (int i = 0; i < Singleton.Instance.ClientList.Count - 1; i++)
+            {
+                for (int j = i + 1; j < Singleton.Instance.ClientList.Count; j++)
+                {
+                    if (Singleton.Instance.ClientList[j].Id < (Singleton.Instance.ClientList[i].Id))
                     {
                         var temp = Singleton.Instance.ClientList[j];
                         Singleton.Instance.ClientList[j] = Singleton.Instance.ClientList[i];

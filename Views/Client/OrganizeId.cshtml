@@ -1,15 +1,21 @@
 ﻿@model IEnumerable<Lab0_1084120_1070720.Models.Client>
 
 @{
-    ViewData["Title"] = "Organize by Name";
+    ViewData["Title"] = "List";
 }
 
-<h1>Organize by Name</h1>
+<h1>List</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>
+    <a asp-action="OrganizeName">Organize by Name</a>
+</p>
 <p>
     <a asp-action="OrganizeLastName">Organize by Last Name</a>
 </p>
-<a asp-action="OrganizeId">Back to List</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -32,7 +38,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -55,6 +62,6 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
